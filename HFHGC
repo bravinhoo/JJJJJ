@@ -1,286 +1,436 @@
-import React, { useState } from 'react';
-import { FileText, Users, Target, Briefcase, Download, Plus, Trash2 } from 'lucide-react';
+# 📁 ARCHIVOS PARA GITHUB - FACTOR360 AI AGENCY
 
-const BriefSystem = () => {
-  const [activeTab, setActiveTab] = useState('brief');
-  const [briefData, setBriefData] = useState({
-    projectName: '',
-    clientName: '',
-    industry: '',
-    projectType: 'branding',
-    budget: '',
-    timeline: '',
-    objectives: [''],
-    targetAudience: '',
-    competitors: [''],
-    brandValues: [''],
-    currentSituation: '',
-    desiredOutcomes: [''],
-    deliverables: [''],
-    constraints: '',
-    references: [''],
-    additionalNotes: ''
-  });
+## 🚀 INSTRUCCIONES DE INSTALACIÓN
 
-  const projectTypes = [
-    { value: 'branding', label: 'Branding Completo', workflow: 'WORKFLOW 1' },
-    { value: 'campaign', label: 'Campaña Digital', workflow: 'WORKFLOW 2' },
-    { value: 'redesign', label: 'Rediseño de Marca', workflow: 'WORKFLOW 3' },
-    { value: 'consulting', label: 'Consultoría Estratégica', workflow: 'WORKFLOW 4' }
-  ];
+### Paso 1: Crear repositorio en GitHub
+1. Ve a GitHub.com
+2. Click en "New repository"
+3. Nombre: `factor360-ai-agency`
+4. Marca como público
+5. Click "Create repository"
 
-  const agents = [
-    { id: 'sales', name: 'Sales Manager', icon: '🤝', desc: 'Gestión comercial y cierre de proyectos' },
-    { id: 'admin', name: 'Administrative Manager', icon: '📋', desc: 'Coordinación operativa y gestión de proyectos' },
-    { id: 'creative', name: 'Creative Director', icon: '🎨', desc: 'Visión estratégica creativa y dirección conceptual' },
-    { id: 'designer', name: 'Designer', icon: '✏️', desc: 'Ejecución visual de identidad de marca' },
-    { id: 'marketing', name: 'Marketing Manager', icon: '📊', desc: 'Estrategia de marketing integral y posicionamiento' },
-    { id: 'finance', name: 'Finance Manager', icon: '💰', desc: 'Gestión presupuestaria, pricing y rentabilidad' },
-    { id: 'social', name: 'Social Media Manager', icon: '📱', desc: 'Estrategia y gestión de presencia en redes sociales' },
-    { id: 'digital', name: 'Digital Marketing Manager', icon: '🌐', desc: 'Estrategias digitales (SEO, SEM, conversión)' },
-    { id: 'prompt', name: 'Prompt Engineer', icon: '🤖', desc: 'Optimización de prompts para herramientas AI' }
-  ];
+### Paso 2: Crear archivo index.html
+1. En tu repositorio, click "Add file" → "Create new file"
+2. Nombre del archivo: `index.html`
+3. Copia y pega el código de abajo
+4. Click "Commit new file"
 
-  const handleArrayInput = (field, index, value) => {
-    const newArray = [...briefData[field]];
-    newArray[index] = value;
-    setBriefData({ ...briefData, [field]: newArray });
-  };
+### Paso 3: Activar GitHub Pages
+1. Ve a "Settings" en tu repositorio
+2. En el menú lateral, click "Pages"
+3. En "Source", selecciona "main" branch
+4. Click "Save"
+5. Espera 1-2 minutos y visita: `https://tu-usuario.github.io/factor360-ai-agency`
 
-  const addArrayItem = (field) => {
-    setBriefData({ ...briefData, [field]: [...briefData[field], ''] });
-  };
+---
 
-  const removeArrayItem = (field, index) => {
-    const newArray = briefData[field].filter((_, i) => i !== index);
-    setBriefData({ ...briefData, [field]: newArray });
-  };
+## 📄 ARCHIVO: index.html
 
-  const generateBrief = () => {
-    const doc = `BRIEF DE PROYECTO - FACTOR360 AI AGENCY
-
-INFORMACIÓN GENERAL
-Proyecto: ${briefData.projectName || '[Por completar]'}
-Cliente: ${briefData.clientName || '[Por completar]'}
-Industria: ${briefData.industry || '[Por completar]'}
-Tipo: ${projectTypes.find(pt => pt.value === briefData.projectType)?.label}
-
-RECURSOS
-Presupuesto: ${briefData.budget || '[Por definir]'}
-Timeline: ${briefData.timeline || '[Por definir]'}
-
-OBJETIVOS
-${briefData.objectives.filter(o => o).map((obj, i) => `${i + 1}. ${obj}`).join('\n') || '[Por definir]'}
-
-AUDIENCIA
-${briefData.targetAudience || '[Por definir]'}
-
-COMPETENCIA
-${briefData.competitors.filter(c => c).map((c, i) => `${i + 1}. ${c}`).join('\n') || '[Por analizar]'}
-
-VALORES DE MARCA
-${briefData.brandValues.filter(v => v).map(v => `- ${v}`).join('\n') || '[Por definir]'}
-
-SITUACIÓN ACTUAL
-${briefData.currentSituation || '[Por analizar]'}
-
-RESULTADOS DESEADOS
-${briefData.desiredOutcomes.filter(o => o).map((o, i) => `${i + 1}. ${o}`).join('\n') || '[Por definir]'}
-
-ENTREGABLES
-${briefData.deliverables.filter(d => d).map(d => `- ${d}`).join('\n') || '[Por definir]'}
-
-RESTRICCIONES
-${briefData.constraints || '[Ninguna especificada]'}
-
-REFERENCIAS
-${briefData.references.filter(r => r).map((r, i) => `${i + 1}. ${r}`).join('\n') || '[Sin referencias]'}
-
-NOTAS ADICIONALES
-${briefData.additionalNotes || '[Sin notas]'}
-
-Factor360 - "No se trata de que te vean, lo importante es que te entiendan"`;
-
-    const blob = new Blob([doc], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `Brief_${briefData.projectName || 'proyecto'}.txt`;
-    a.click();
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Factor360 AI Agency</h1>
-          <p className="text-gray-600 italic">No se trata de que te vean, lo importante es que te entiendan</p>
-        </div>
-
-        <div className="flex gap-2 mb-6">
-          <button onClick={() => setActiveTab('brief')} className={`px-4 py-2 rounded ${activeTab === 'brief' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}>
-            Brief
-          </button>
-          <button onClick={() => setActiveTab('agents')} className={`px-4 py-2 rounded ${activeTab === 'agents' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}>
-            Agentes
-          </button>
-        </div>
-
-        {activeTab === 'brief' && (
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold">Template de Brief</h2>
-              <button onClick={generateBrief} className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                <Download className="w-4 h-4" />
-                Exportar
-              </button>
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factor360 AI Agency - Sistema de Brief</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="app" class="min-h-screen p-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6 border-l-8 border-blue-600">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Factor360 AI Agency</h1>
+                <p class="text-gray-600 italic">"No se trata de que te vean, lo importante es que te entiendan"</p>
             </div>
 
-            <div className="space-y-6">
-              <div className="bg-blue-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Información General</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <input type="text" value={briefData.projectName} onChange={(e) => setBriefData({...briefData, projectName: e.target.value})} placeholder="Nombre del Proyecto" className="p-2 border rounded" />
-                  <input type="text" value={briefData.clientName} onChange={(e) => setBriefData({...briefData, clientName: e.target.value})} placeholder="Cliente" className="p-2 border rounded" />
-                  <input type="text" value={briefData.industry} onChange={(e) => setBriefData({...briefData, industry: e.target.value})} placeholder="Industria" className="p-2 border rounded" />
-                  <select value={briefData.projectType} onChange={(e) => setBriefData({...briefData, projectType: e.target.value})} className="p-2 border rounded">
-                    {projectTypes.map(pt => <option key={pt.value} value={pt.value}>{pt.label}</option>)}
-                  </select>
-                  <input type="text" value={briefData.budget} onChange={(e) => setBriefData({...briefData, budget: e.target.value})} placeholder="Presupuesto" className="p-2 border rounded" />
-                  <input type="text" value={briefData.timeline} onChange={(e) => setBriefData({...briefData, timeline: e.target.value})} placeholder="Timeline" className="p-2 border rounded" />
+            <!-- Navigation -->
+            <div class="flex gap-2 mb-6">
+                <button onclick="showTab('brief')" id="btn-brief" class="px-4 py-2 rounded bg-blue-600 text-white font-semibold">
+                    📋 Brief
+                </button>
+                <button onclick="showTab('agents')" id="btn-agents" class="px-4 py-2 rounded bg-white text-gray-700 font-semibold">
+                    👥 Agentes
+                </button>
+                <button onclick="showTab('workflow')" id="btn-workflow" class="px-4 py-2 rounded bg-white text-gray-700 font-semibold">
+                    🔄 Workflows
+                </button>
+                <button onclick="showTab('docs')" id="btn-docs" class="px-4 py-2 rounded bg-white text-gray-700 font-semibold">
+                    📚 Documentación
+                </button>
+            </div>
+
+            <!-- Brief Tab -->
+            <div id="tab-brief" class="tab-content bg-white rounded-lg shadow-md p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Template de Brief</h2>
+                    <button onclick="exportBrief()" class="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                        ⬇️ Exportar Brief
+                    </button>
                 </div>
-              </div>
 
-              <div className="bg-green-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Objetivos</h3>
-                {briefData.objectives.map((obj, i) => (
-                  <div key={i} className="flex gap-2 mb-2">
-                    <input type="text" value={obj} onChange={(e) => handleArrayInput('objectives', i, e.target.value)} placeholder={`Objetivo ${i + 1}`} className="flex-1 p-2 border rounded" />
-                    {briefData.objectives.length > 1 && (
-                      <button onClick={() => removeArrayItem('objectives', i)} className="px-3 bg-red-500 text-white rounded">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button onClick={() => addArrayItem('objectives')} className="text-green-700 font-semibold mt-2">+ Añadir Objetivo</button>
-              </div>
+                <div class="space-y-6">
+                    <!-- Información General -->
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">📋 Información General</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" id="projectName" placeholder="Nombre del Proyecto *" class="p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 outline-none">
+                            <input type="text" id="clientName" placeholder="Cliente *" class="p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 outline-none">
+                            <input type="text" id="industry" placeholder="Industria" class="p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 outline-none">
+                            <select id="projectType" class="p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 outline-none">
+                                <option value="branding">Branding Completo (WORKFLOW 1)</option>
+                                <option value="campaign">Campaña Digital (WORKFLOW 2)</option>
+                                <option value="redesign">Rediseño de Marca (WORKFLOW 3)</option>
+                                <option value="consulting">Consultoría Estratégica (WORKFLOW 4)</option>
+                            </select>
+                            <input type="text" id="budget" placeholder="Presupuesto (ej: 5000€ - 10000€)" class="p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 outline-none">
+                            <input type="text" id="timeline" placeholder="Timeline (ej: 8 semanas)" class="p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 outline-none">
+                        </div>
+                    </div>
 
-              <div className="bg-purple-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Audiencia Objetivo</h3>
-                <textarea value={briefData.targetAudience} onChange={(e) => setBriefData({...briefData, targetAudience: e.target.value})} rows="3" placeholder="Describe la audiencia..." className="w-full p-2 border rounded" />
-              </div>
+                    <!-- Objetivos -->
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">🎯 Objetivos del Proyecto</h3>
+                        <div id="objectives-list">
+                            <div class="flex gap-2 mb-2">
+                                <input type="text" placeholder="Objetivo 1" class="flex-1 p-3 border-2 border-gray-200 rounded-lg focus:border-green-500 outline-none objective-input">
+                            </div>
+                        </div>
+                        <button onclick="addObjective()" class="text-green-700 font-semibold mt-2">+ Añadir Objetivo</button>
+                    </div>
 
-              <div className="bg-orange-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Competencia</h3>
-                {briefData.competitors.map((comp, i) => (
-                  <div key={i} className="flex gap-2 mb-2">
-                    <input type="text" value={comp} onChange={(e) => handleArrayInput('competitors', i, e.target.value)} placeholder={`Competidor ${i + 1}`} className="flex-1 p-2 border rounded" />
-                    {briefData.competitors.length > 1 && (
-                      <button onClick={() => removeArrayItem('competitors', i)} className="px-3 bg-red-500 text-white rounded">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button onClick={() => addArrayItem('competitors')} className="text-orange-700 font-semibold mt-2">+ Añadir Competidor</button>
-              </div>
+                    <!-- Audiencia -->
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">👥 Audiencia Objetivo</h3>
+                        <textarea id="targetAudience" rows="4" placeholder="Describe la audiencia objetivo: edad, género, intereses, comportamientos..." class="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 outline-none"></textarea>
+                    </div>
 
-              <div className="bg-pink-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Valores de Marca</h3>
-                {briefData.brandValues.map((val, i) => (
-                  <div key={i} className="flex gap-2 mb-2">
-                    <input type="text" value={val} onChange={(e) => handleArrayInput('brandValues', i, e.target.value)} placeholder={`Valor ${i + 1}`} className="flex-1 p-2 border rounded" />
-                    {briefData.brandValues.length > 1 && (
-                      <button onClick={() => removeArrayItem('brandValues', i)} className="px-3 bg-red-500 text-white rounded">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button onClick={() => addArrayItem('brandValues')} className="text-pink-700 font-semibold mt-2">+ Añadir Valor</button>
-              </div>
+                    <!-- Competencia -->
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">🔍 Análisis de Competencia</h3>
+                        <div id="competitors-list">
+                            <div class="flex gap-2 mb-2">
+                                <input type="text" placeholder="Competidor 1" class="flex-1 p-3 border-2 border-gray-200 rounded-lg focus:border-orange-500 outline-none competitor-input">
+                            </div>
+                        </div>
+                        <button onclick="addCompetitor()" class="text-orange-700 font-semibold mt-2">+ Añadir Competidor</button>
+                    </div>
 
-              <div className="bg-gray-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Situación Actual</h3>
-                <textarea value={briefData.currentSituation} onChange={(e) => setBriefData({...briefData, currentSituation: e.target.value})} rows="3" placeholder="Describe la situación actual..." className="w-full p-2 border rounded" />
-              </div>
+                    <!-- Valores de Marca -->
+                    <div class="bg-pink-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">💎 Valores de Marca</h3>
+                        <div id="values-list">
+                            <div class="flex gap-2 mb-2">
+                                <input type="text" placeholder="Valor 1" class="flex-1 p-3 border-2 border-gray-200 rounded-lg focus:border-pink-500 outline-none value-input">
+                            </div>
+                        </div>
+                        <button onclick="addValue()" class="text-pink-700 font-semibold mt-2">+ Añadir Valor</button>
+                    </div>
 
-              <div className="bg-indigo-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Resultados Deseados</h3>
-                {briefData.desiredOutcomes.map((out, i) => (
-                  <div key={i} className="flex gap-2 mb-2">
-                    <input type="text" value={out} onChange={(e) => handleArrayInput('desiredOutcomes', i, e.target.value)} placeholder={`Resultado ${i + 1}`} className="flex-1 p-2 border rounded" />
-                    {briefData.desiredOutcomes.length > 1 && (
-                      <button onClick={() => removeArrayItem('desiredOutcomes', i)} className="px-3 bg-red-500 text-white rounded">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button onClick={() => addArrayItem('desiredOutcomes')} className="text-indigo-700 font-semibold mt-2">+ Añadir Resultado</button>
-              </div>
+                    <!-- Situación Actual -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">📍 Situación Actual</h3>
+                        <textarea id="currentSituation" rows="4" placeholder="Describe la situación actual del cliente, sus desafíos, y por qué busca este servicio..." class="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-gray-500 outline-none"></textarea>
+                    </div>
 
-              <div className="bg-cyan-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Entregables</h3>
-                {briefData.deliverables.map((del, i) => (
-                  <div key={i} className="flex gap-2 mb-2">
-                    <input type="text" value={del} onChange={(e) => handleArrayInput('deliverables', i, e.target.value)} placeholder={`Entregable ${i + 1}`} className="flex-1 p-2 border rounded" />
-                    {briefData.deliverables.length > 1 && (
-                      <button onClick={() => removeArrayItem('deliverables', i)} className="px-3 bg-red-500 text-white rounded">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button onClick={() => addArrayItem('deliverables')} className="text-cyan-700 font-semibold mt-2">+ Añadir Entregable</button>
-              </div>
+                    <!-- Resultados Deseados -->
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">✨ Resultados Deseados</h3>
+                        <div id="outcomes-list">
+                            <div class="flex gap-2 mb-2">
+                                <input type="text" placeholder="Resultado esperado 1" class="flex-1 p-3 border-2 border-gray-200 rounded-lg focus:border-indigo-500 outline-none outcome-input">
+                            </div>
+                        </div>
+                        <button onclick="addOutcome()" class="text-indigo-700 font-semibold mt-2">+ Añadir Resultado</button>
+                    </div>
 
-              <div className="bg-red-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Restricciones</h3>
-                <textarea value={briefData.constraints} onChange={(e) => setBriefData({...briefData, constraints: e.target.value})} rows="2" placeholder="Limitaciones..." className="w-full p-2 border rounded" />
-              </div>
+                    <!-- Entregables -->
+                    <div class="bg-cyan-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">📦 Entregables</h3>
+                        <div id="deliverables-list">
+                            <div class="flex gap-2 mb-2">
+                                <input type="text" placeholder="Entregable 1" class="flex-1 p-3 border-2 border-gray-200 rounded-lg focus:border-cyan-500 outline-none deliverable-input">
+                            </div>
+                        </div>
+                        <button onclick="addDeliverable()" class="text-cyan-700 font-semibold mt-2">+ Añadir Entregable</button>
+                    </div>
 
-              <div className="bg-yellow-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Referencias</h3>
-                {briefData.references.map((ref, i) => (
-                  <div key={i} className="flex gap-2 mb-2">
-                    <input type="text" value={ref} onChange={(e) => handleArrayInput('references', i, e.target.value)} placeholder="URL o descripción" className="flex-1 p-2 border rounded" />
-                    {briefData.references.length > 1 && (
-                      <button onClick={() => removeArrayItem('references', i)} className="px-3 bg-red-500 text-white rounded">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button onClick={() => addArrayItem('references')} className="text-yellow-700 font-semibold mt-2">+ Añadir Referencia</button>
-              </div>
+                    <!-- Restricciones -->
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">⚠️ Restricciones y Consideraciones</h3>
+                        <textarea id="constraints" rows="3" placeholder="Limitaciones técnicas, legales, de tiempo, presupuesto..." class="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-red-500 outline-none"></textarea>
+                    </div>
 
-              <div className="bg-teal-50 p-4 rounded">
-                <h3 className="font-bold mb-3">Notas Adicionales</h3>
-                <textarea value={briefData.additionalNotes} onChange={(e) => setBriefData({...briefData, additionalNotes: e.target.value})} rows="3" placeholder="Notas..." className="w-full p-2 border rounded" />
-              </div>
-            </div>
-          </div>
-        )}
+                    <!-- Referencias -->
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">🎨 Referencias Visuales/Conceptuales</h3>
+                        <div id="references-list">
+                            <div class="flex gap-2 mb-2">
+                                <input type="text" placeholder="URL o descripción de referencia" class="flex-1 p-3 border-2 border-gray-200 rounded-lg focus:border-yellow-500 outline-none reference-input">
+                            </div>
+                        </div>
+                        <button onclick="addReference()" class="text-yellow-700 font-semibold mt-2">+ Añadir Referencia</button>
+                    </div>
 
-        {activeTab === 'agents' && (
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-bold mb-6">Directorio de Agentes</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {agents.map(agent => (
-                <div key={agent.id} className="border-2 rounded-lg p-4 hover:shadow-lg transition">
-                  <div className="text-4xl mb-2 text-center">{agent.icon}</div>
-                  <h3 className="font-bold text-center mb-2">{agent.name}</h3>
-                  <p className="text-sm text-gray-600">{agent.desc}</p>
+                    <!-- Notas Adicionales -->
+                    <div class="bg-teal-50 p-4 rounded-lg">
+                        <h3 class="font-bold mb-3 text-lg">📝 Notas Adicionales</h3>
+                        <textarea id="additionalNotes" rows="4" placeholder="Cualquier información adicional relevante para el proyecto..." class="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-teal-500 outline-none"></textarea>
+                    </div>
                 </div>
-              ))}
             </div>
-          </div>
-        )}
-      </div>
+
+            <!-- Agents Tab -->
+            <div id="tab-agents" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
+                <h2 class="text-2xl font-bold mb-6">Directorio de Agentes AI</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
+                        <div class="text-5xl mb-3 text-center">🤝</div>
+                        <h3 class="font-bold text-center mb-2">Sales Manager</h3>
+                        <p class="text-sm text-gray-600">Gestión comercial y cierre de proyectos. Elabora propuestas, gestiona pipeline y negocia.</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
+                        <div class="text-5xl mb-3 text-center">📋</div>
+                        <h3 class="font-bold text-center mb-2">Administrative Manager</h3>
+                        <p class="text-sm text-gray-600">Coordinación operativa y gestión de proyectos. Organiza workflows y facilita comunicación.</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
+                        <div class="text-5xl mb-3 text-center">🎨</div>
+                        <h3 class="font-bold text-center mb-2">Creative Director</h3>
+                        <p class="text-sm text-gray-600">Visión estratégica creativa y dirección conceptual. Define tono, estilo y narrativa de marca.</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
+                        <div class="text-5xl mb-3 text-center">✏️</div>
+                        <h3 class="font-bold text-center mb-2">Designer</h3>
+                        <p class="text-sm text-gray-600">Ejecución visual de identidad de marca. Diseña logos, paletas, tipografías y sistemas visuales.</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
+                        <div class="text-5xl mb-3 text-center">📊</div>
+                        <h3 class="font-bold text-center mb-2">Marketing Manager</h3>
+                        <p class="text-sm text-gray-600">Estrategia de marketing integral. Define objetivos, KPIs y coordina acciones de marketing.</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
+                        <div class="text-5xl mb-3 text-center">💰</div>
+                        <h3 class="font-bold text-center mb-2">Finance Manager</h3>
+                        <p class="text-sm text-gray-600">Gestión presupuestaria, pricing y rentabilidad. Elabora presupuestos y analiza viabilidad.</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
+                        <div class="text-5xl mb-3 text-center">📱</div>
+                        <h3 class="font-bold text-center mb-2">Social Media Manager</h3>
+                        <p class="text-sm text-gray-600">Estrategia de redes sociales. Planifica contenidos, define tono digital y analiza engagement.</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
+                        <div class="text-5xl mb-3 text-center">🌐</div>
+                        <h3 class="font-bold text-center mb-2">Digital Marketing Manager</h3>
+                        <p class="text-sm text-gray-600">Estrategias digitales (SEO, SEM, email). Optimiza presencia digital y gestiona campañas pagadas.</p>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
+                        <div class="text-5xl mb-3 text-center">🤖</div>
+                        <h3 class="font-bold text-center mb-2">Prompt Engineer</h3>
+                        <p class="text-sm text-gray-600">Optimización de prompts AI. Mejora comunicación con herramientas y documenta mejores prácticas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workflow Tab -->
+            <div id="tab-workflow" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
+                <h2 class="text-2xl font-bold mb-6">Workflows por Tipo de Proyecto</h2>
+                
+                <div class="space-y-6">
+                    <!-- Workflow 1 -->
+                    <div class="border-2 border-gray-200 rounded-lg p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Branding Completo</h3>
+                            <span class="bg-blue-600 text-white px-4 py-2 rounded font-semibold">WORKFLOW 1</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+                                <div>
+                                    <h4 class="font-bold">Briefing</h4>
+                                    <p class="text-sm text-gray-600">🤝 Sales Manager • 📋 Administrative Manager</p>
+                                    <p class="text-sm text-gray-500">Duración: 1 semana</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+                                <div>
+                                    <h4 class="font-bold">Análisis Estratégico</h4>
+                                    <p class="text-sm text-gray-600">🎨 Creative Director • 📊 Marketing Manager</p>
+                                    <p class="text-sm text-gray-500">Duración: 2 semanas</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+                                <div>
+                                    <h4 class="font-bold">Desarrollo Visual</h4>
+                                    <p class="text-sm text-gray-600">✏️ Designer • 🎨 Creative Director</p>
+                                    <p class="text-sm text-gray-500">Duración: 3 semanas</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+                                <div>
+                                    <h4 class="font-bold">Planificación Digital</h4>
+                                    <p class="text-sm text-gray-600">📱 Social Media Manager • 🌐 Digital Marketing Manager</p>
+                                    <p class="text-sm text-gray-500">Duración: 1 semana</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">5</div>
+                                <div>
+                                    <h4 class="font-bold">Presentación</h4>
+                                    <p class="text-sm text-gray-600">🤝 Sales Manager • 🎨 Creative Director</p>
+                                    <p class="text-sm text-gray-500">Duración: 1 semana</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">6</div>
+                                <div>
+                                    <h4 class="font-bold">Implementación</h4>
+                                    <p class="text-sm text-gray-600">📋 Administrative Manager • ✏️ Designer</p>
+                                    <p class="text-sm text-gray-500">Duración: 2 semanas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Workflow 2 -->
+                    <div class="border-2 border-gray-200 rounded-lg p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Campaña Digital</h3>
+                            <span class="bg-green-600 text-white px-4 py-2 rounded font-semibold">WORKFLOW 2</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+                                <div>
+                                    <h4 class="font-bold">Definición de Objetivos</h4>
+                                    <p class="text-sm text-gray-600">📊 Marketing Manager</p>
+                                    <p class="text-sm text-gray-500">Duración: 3 días</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+                                <div>
+                                    <h4 class="font-bold">Estrategia Digital</h4>
+                                    <p class="text-sm text-gray-600">🌐 Digital Marketing Manager • 📱 Social Media Manager</p>
+                                    <p class="text-sm text-gray-500">Duración: 1 semana</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+                                <div>
+                                    <h4 class="font-bold">Concepto Creativo</h4>
+                                    <p class="text-sm text-gray-600">🎨 Creative Director • ✏️ Designer</p>
+                                    <p class="text-sm text-gray-500">Duración: 1 semana</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+                                <div>
+                                    <h4 class="font-bold">Producción</h4>
+                                    <p class="text-sm text-gray-600">✏️ Designer • 📱 Social Media Manager</p>
+                                    <p class="text-sm text-gray-500">Duración: 2 semanas</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded flex items-start gap-3">
+                                <div class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">5</div>
+                                <div>
+                                    <h4 class="font-bold">Lanzamiento</h4>
+                                    <p class="text-sm text-gray-600">🌐 Digital Marketing Manager • 📋 Administrative Manager</p>
+                                    <p class="text-sm text-gray-500">Duración: 1 semana</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documentation Tab -->
+            <div id="tab-docs" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
+                <h2 class="text-2xl font-bold mb-6">Sistema de Documentación</h2>
+                
+                <div class="space-y-6">
+                    <div class="border-2 border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-4">📁 Estructura de Carpetas</h3>
+                        <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto">
+                            <pre>📁 FACTOR360_AI_AGENCY/
+├── 📁 01_BRIEFING/
+├── 📁 02_ESTRATEGIA/
+├── 📁 03_CREATIVIDAD/
+├── 📁 04_DISEÑO/
+├── 📁 05_MARKETING/
+├── 📁 06_DIGITAL/
+├── 📁 07_FINANCIERO/
+├── 📁 08_ENTREGAS/
+└── 📁 09_DOCUMENTACION/</pre>
+                        </div>
+                    </div>
+
+                    <div class="border-2 border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-4">✅ Convenciones de Nomenclatura</h3>
+                        <div class="space-y-3">
+                            <div class="bg-green-50 p-4 rounded">
+                                <p class="font-semibold text-green-900 mb-2">Buenas Prácticas:</p>
+                                <ul class="text-sm text-green-800 space-y-1">
+                                    <li>• Brief_EmpresaXYZ_2024-11-01.pdf</li>
+                                    <li>• Logo_Final_v3_RGB.ai</li>
+                                    <li>• Plan_Marketing_Q1_2025.pdf</li>
+                                </ul>
+                            </div>
+                            <div class="bg-red-50 p-4 rounded">
+                                <p class="font-semibold text-red-900 mb-2">Evitar:</p>
+                                <ul class="text-sm text-red-800 space-y-1">
+                                    <li>• documento final final FINAL.pdf</li>
+                                    <li>• logo nuevo 2.ai</li>
+                                    <li>• Sin título-1.pdf</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  );
-};
 
-export default BriefSystem;
+    <script>
+        // Tab Navigation
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('[id^="btn-"]');
+            
+            tabs.forEach(tab => tab.classList.add('hidden'));
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-700');
+            });
+            
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            document.getElementById('btn-' + tabName).classList.remove('bg-white', 'text-gray-700');
+            document.getElementById('btn-' + tabName).classList.add('bg-blue-600', 'text-white');
+        }
+
+        // Dynamic Fields
+        function addObjective() {
+            const list = document.getElementById('objectives-list');
+            const div = document.createElement('div');
+            div.className = 'flex gap-2 mb-2';
+            div.innerHTML = `
+                <input type="text" placeholder="Objetivo ${list.children.length + 1}" class="flex-1 p-3 border-2 border-gray-200 rounded-lg focus:border-green-500 outline-none objective-input">
+                <button onclick="this.parentElement.remove()" class="px-3 bg-red-500 text-white rounded hover:bg-red-600">❌</button>
+            `;
+            list.appendChild(div);
+        }
+
+        function addCompetitor() {
+            const list = document.getElementById('competitors-list');
+            const
